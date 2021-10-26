@@ -30,6 +30,7 @@ const App = () => {
         const arrayLength = products.length
         const lastElem = products[arrayLength - 1]
         const lastId = lastElem.id
+
         setProducts([
             ...products,
             { id: lastId + 1, name: name, price: price, quantity: 1 }
@@ -48,6 +49,14 @@ const App = () => {
                 { id: lastId + 1, name: name, price: price, quantity: 1 }
             ]
         })
+    }
+
+    const deleteProduct = id => {
+        const doIt = window.confirm("Are you sure?")
+        if (doIt) {
+            const newList = products.filter(p => p.id !== id)
+            setProducts(newList)
+        }
     }
 
     return (
@@ -72,7 +81,7 @@ const App = () => {
                                 <td className='td'>{product.quantity}</td>
                                 <td className='td'>{product.quantity * product.price} €</td>
                                 <td className='td'>
-                                    <button>Delete</button>
+                                    <button onClick={() => deleteProduct(product.id)}>Delete</button>
                                 </td>
                             </tr>
                         )
